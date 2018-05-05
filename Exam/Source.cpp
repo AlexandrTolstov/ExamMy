@@ -213,6 +213,7 @@ void main()
 
 		if (YesNo != 'Y' && YesNo != 'y') break;
 		printf("\n________________________________________________________\n");
+		system("cls");
 	}
 
 #pragma endregion Основная программа
