@@ -165,7 +165,7 @@ void NewRow(Data *data)
 			Price = 0;
 			printf("\nÖåíà Îïòîâàÿ \nPriceRoz = ");
 			scanf("%d", &Price);
-			getchar();
+			//getchar();
 			*data->kat[i].tov[NumTov].Opt = Price;
 
 			*data->kat[i].NumTov += 1;
