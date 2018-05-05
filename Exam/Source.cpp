@@ -161,9 +161,54 @@ void main()
 
 #pragma region Основная программа
 
-	NewRow(data);
-	WriteToFile(data, row);
-	VivodStruct(data);
+	while (1)
+	{
+		int VibMenu = 0;
+		printf("________________________________________________________\n");
+		printf("Выберети действие:\n");
+		printf("Добавление записи в прайс: 1\n");
+		printf("Удаление записи из прайса: 2\n");
+		printf("________________________________________________________\n");
+
+		printf("Menu = ");
+		scanf("%d", &VibMenu);
+		printf("\n");
+
+		while (VibMenu <= 0 || VibMenu > 2)
+		{
+			printf("Вы ввели неверный пункт меню.\nПопробуйте снова\nMenu = ");
+			scanf("%d", &VibMenu);
+			printf("\n");
+		}
+
+		switch (VibMenu)
+		{
+		case 1:
+		{
+			NewRow(data);
+			WriteToFile(data, row);
+			VivodStruct(data);
+			break;
+		}
+		case 2:
+		{
+			DeletRow(data);
+			WriteToFile(data, row);
+			VivodStruct(data);
+			break;
+		}
+		default:
+			break;
+		}
+
+		printf("\n________________________________________________________\n");
+		printf("Желаете продолжить? (Y/N): ");
+		char YesNo = ' ';
+		getchar();
+		scanf("%c", &YesNo);
+
+		if (YesNo != 'Y' && YesNo != 'y') break;
+	}
 
 #pragma endregion Основная программа
 

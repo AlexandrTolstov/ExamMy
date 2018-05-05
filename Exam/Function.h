@@ -6,5 +6,7 @@ int IndWriteRowChar(int Start, char *Row, char *Mass);
 void VivodStruct(Data *data);
 /*Создание новой записи*/
 void NewRow(Data *data);
+/*Удаление строк из файла*/
+void DeletRow(Data *data);
 /*Запись Структуры в файл*/
 void WriteToFile(Data *data, Row *row);

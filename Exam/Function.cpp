@@ -161,7 +161,7 @@ void NewRow(Data *data)
 			getchar();
 			*data->kat[i].tov[NumTov].Roz = Price;
 
-			/*Цена Розничная*/
+			/*Цена Оптовая*/
 			Price = 0;
 			printf("\nЦена Оптовая \nPriceRoz = ");
 			scanf("%d", &Price);
@@ -169,6 +169,81 @@ void NewRow(Data *data)
 			*data->kat[i].tov[NumTov].Opt = Price;
 
 			*data->kat[i].NumTov += 1;
+		}
+	}
+}
+
+/*Удаление строк из файла*/
+void DeletRow(Data *data)
+{
+	printf("Удаление записи\n");
+	printf("----------------------------------------------\n");
+	printf("Выберете категорию из следующего списка товаров товаров:\n\n");
+
+	int VibKat = 0;
+
+	int NumKat = *data->NumKateg;
+
+	for (size_t i = 0; i < NumKat; i++)
+	{
+		printf("%d = %s", i + 1, data->kat[i].Kat);
+	}
+
+	printf("\nВведите номер категории\n");
+	printf("N = ");
+
+	scanf("%d", &VibKat);
+	while (VibKat <= 0 || VibKat > *data->NumKateg)
+	{
+		printf("\nВы выбрали неверный номер категории.\nПопробуйте занаво\nN = ");
+		scanf("%d", &VibKat);
+	}
+
+	for (size_t i = 0; i < NumKat; i++)
+	{
+		if ((VibKat - 1) == i)
+		{
+			for (size_t j = 0; j < *data->kat[i].NumTov; j++)
+			{
+				printf("№%d - %d  %s\n", j + 1, *data->kat[i].tov[j].Cod, data->kat[i].tov[j].Name);
+			}
+
+			int VibTov = 0;
+			int NamTovar = *data->kat[i].NumTov;
+			printf("\nВведите номер товара для удаления\n");
+			printf("N = ");
+
+			scanf("%d", &VibTov);
+			while (VibKat <= 0 || VibTov > NamTovar)
+			{
+				printf("\nВы выбрали неверный номер товара.\nПопробуйте занаво\nN = ");
+				scanf("%d", &VibTov);
+			}
+
+			for (size_t j = VibTov - 1; j < NamTovar; j++)
+			{
+				if ((VibTov - 1) == j && j < NamTovar - 1)
+				{
+					for (size_t z = j; z < (NamTovar - 1); z++)
+					{
+						data->kat[i].tov[z].Zv = data->kat[i].tov[z + 1].Zv;
+						*data->kat[i].tov[z].Cod = *data->kat[i].tov[z + 1].Cod;
+						//data->kat[i].tov[j].Name = (char*)realloc(data->kat[i].tov[j].Name, sizeof(char)*(strlen(data->kat[i].tov[j + 1].Name)));
+
+						data->kat[i].tov[z].Name = data->kat[i].tov[z + 1].Name;
+						*data->kat[i].tov[z].Roz = *data->kat[i].tov[z + 1].Roz;
+						*data->kat[i].tov[z].Opt = *data->kat[i].tov[z + 1].Opt;
+					}
+
+					*data->kat[i].NumTov -= 1;
+					data->kat[i].tov = (Tovar*)realloc(data->kat[i].tov, sizeof(Tovar)*(NamTovar - 1));
+				}
+				else if ((VibTov - 1) == j)
+				{
+					*data->kat[i].NumTov -= 1;
+					data->kat[i].tov = (Tovar*)realloc(data->kat[i].tov, sizeof(Tovar)*(NamTovar - 1));
+				}
+			}
 		}
 	}
 }
@@ -232,5 +307,3 @@ void WriteToFile(Data *data, Row *row) // Row временные данные
 	}
 	fclose(file);
 }
-
-/*Удаление строк из файла*/
