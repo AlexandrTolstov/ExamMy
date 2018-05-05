@@ -175,7 +175,7 @@ void main()
 		scanf("%d", &VibMenu);
 		printf("\n");
 
-		while (VibMenu <= 0 || VibMenu > 2)
+		while (VibMenu <= 0 || VibMenu > 3)
 		{
 			printf("Вы ввели неверный пункт меню.\nПопробуйте снова\nMenu = ");
 			scanf("%d", &VibMenu);
