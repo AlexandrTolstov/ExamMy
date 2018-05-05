@@ -168,6 +168,7 @@ void main()
 		printf("Выберети действие:\n");
 		printf("Добавление записи в прайс: 1\n");
 		printf("Удаление записи из прайса: 2\n");
+		printf("Распечатка прайса: 3\n");
 		printf("________________________________________________________\n");
 
 		printf("Menu = ");
@@ -187,13 +188,16 @@ void main()
 		{
 			NewRow(data);
 			WriteToFile(data, row);
-			VivodStruct(data);
 			break;
 		}
 		case 2:
 		{
 			DeletRow(data);
 			WriteToFile(data, row);
+			break;
+		}
+		case 3: 
+		{
 			VivodStruct(data);
 			break;
 		}
@@ -208,6 +212,7 @@ void main()
 		scanf("%c", &YesNo);
 
 		if (YesNo != 'Y' && YesNo != 'y') break;
+		printf("\n________________________________________________________\n");
 	}
 
 #pragma endregion Основная программа
